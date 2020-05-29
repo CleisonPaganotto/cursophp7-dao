@@ -1,28 +1,15 @@
 <?php  
 	require_once("config.php");
 
-	//$usuario = new Usuario();
+	$aluno = new Usuario("Cleia1b2c3","Cleia1b2c3");
 
-	//$usuario->insert("222", "222");
+	//$aluno->setLogin("Aluno");
+	//$aluno->setSenha("12345");
 
-	///MOSTRA LISTA ATUALIZADA
-
-	//$lista = Usuario::getList();
-
-	//echo json_encode($lista);
-
-
-
-	/*Este metodo faz um insert utilizando uma procedure*/
-	$aluno = new Usuario();
-
-	$aluno->setLogin("");
-	$aluno->setSenha("");
-
-	$aluno->insertProcedure();
+	$aluno->insert();
 
 	echo $aluno;
-	
+
 
 	/*Carrega um usuario usando o login e a senha
 
