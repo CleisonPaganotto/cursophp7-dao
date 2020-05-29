@@ -1,16 +1,25 @@
 <?php  
 	require_once("config.php");
 
-	$aluno = new Usuario("Cleia1b2c3","Cleia1b2c3");
+	$usuario = new Usuario();
+	$usuario->loadbyID(10);
+	$usuario->update("Professor", "Profesor!@#$&"); 
 
-	//$aluno->setLogin("Aluno");
-	//$aluno->setSenha("12345");
+	echo $usuario;
+
+	/*
+	//Da o insert na tabela utilizando a procedure e atribui o valor direto no metodo construtor da classe
+	$aluno = new Usuario("Cleia1b2c3","Cleia1b2c3");
+	
+	//Utilixa os metodos set para setar o valor que ira ser inserrido no banco de dados, sem usar o metodo construtor
+	$aluno->setLogin("Aluno");
+	$aluno->setSenha("12345");
 
 	$aluno->insert();
 
 	echo $aluno;
-
-
+	*/
+	
 	/*Carrega um usuario usando o login e a senha
 
 	$user = new Usuario();
