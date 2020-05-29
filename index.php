@@ -3,7 +3,7 @@
 
 	$usuario = new Usuario();
 
-	$usuario->loadById(2);
+	$usuario->loadbyId(2);
 
 	echo $usuario;
 

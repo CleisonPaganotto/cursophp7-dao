@@ -39,7 +39,7 @@
 			$this->dtCad = $value;
 		}
 
-		public function loadById($id){
+		public function loadbyId($id){
 
 			$sql = new Sql();
 
