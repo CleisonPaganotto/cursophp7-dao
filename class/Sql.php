@@ -1,6 +1,6 @@
 <?php  
 
-	Class Sql extends PDO{
+	class Sql extends PDO{
 		
 		private $conn;
 
@@ -10,9 +10,10 @@
 
 		}
 
+
 		private function setParams($statment, $parameters=array()){
 			foreach ($parameters as $key => $value) {
-				$statment->setParam($key, $value);
+				$this->setParam($key, $value);
 			}
 
 		}
@@ -36,7 +37,8 @@
 
 
 		public function select($rawQuery, $params=array()):array{
-			$stmt=$this->query($rawQuery, $params);
+
+			$stmt = $this->query($rawQuery, $params);
 
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}		

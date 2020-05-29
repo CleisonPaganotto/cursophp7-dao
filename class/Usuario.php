@@ -39,7 +39,7 @@
 			$this->dtCad = $value;
 		}
 
-		public function loadbyId($id){
+		public function loadById($id){
 
 			$sql = new Sql();
 
@@ -54,7 +54,7 @@
 				$this->setIdusuario($row['idusuario']);
 				$this->setLogin($row['login']);
 				$this->setSenha($row['senha']);
-				$this->setDtcad($row['dtCad']);
+				$this->setDtcad(new DateTime($row['dtCad']));
 			}
 
 		}
