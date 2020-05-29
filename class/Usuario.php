@@ -55,12 +55,7 @@
 
 			if (count($results) > 0) {
 
-				$row = $results[0];
-
-				$this->setIdusuario($row['idusuario']);
-				$this->setLogin($row['login']);
-				$this->setSenha($row['senha']);
-				$this->setDtcad(new DateTime($row['dtCad']));
+				$this->setData($results[0]);
 			}
 
 		}
@@ -71,7 +66,7 @@
 
 			$sql = new Sql();
 
-			return $sql->select("SELECT * FROM tb_usuarios ORDER BY login");
+			return $sql->select("SELECT * FROM tb_usuarios ORDER BY idusuario");
 		}
 
 		//Metodo para fazer a busca pelo Login do usuario
@@ -98,18 +93,51 @@
 
 			if (count($results) > 0) {
 
-				$row = $results[0];
+				$this->setData($results[0]);
 
-				$this->setIdusuario($row['idusuario']);
-				$this->setLogin($row['login']);
-				$this->setSenha($row['senha']);
-				$this->setDtcad(new DateTime($row['dtCad']));
 			} else {
 
 				throw new Exception("Login ou Senha invalidos");
 				
 
 			}
+		}
+
+		public function setData($data){
+			$this->setIdusuario($row['idusuario']);
+			$this->setLogin($row['login']);
+			$this->setSenha($row['senha']);
+			$this->setDtcad(new DateTime($row['dtCad']));
+		}
+
+		//Metodo utilizado para inserir dados no banco através de uma procedure
+
+		public function insertProcedure(){
+
+			$sql = new Sql();
+
+			$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :SENHA)",array(
+				":LOGIN"=>$this->getLogin(),
+				":SENHA"=>$this->getSenha()
+			));
+
+			if (count($results) > 0) {
+				$this->setData($results[0]);
+			}
+		}
+
+		public function insert($login, $password) {
+
+			$this->setLogin($login);
+			$this->setSenha($password);
+			$sql = new Sql();
+
+			$sql->query("INSERT INTO tb_usuarios (login, senha) VALUES (:LOGIN, :PASSWORD)", array(
+
+			'LOGIN' => $this->getlogin(),
+			'PASSWORD' => $this->getsenha(),
+			));
+
 		}
 
 		// Essa função utiliza os Getters para setar o valor de cada atributo dentro de um Json utilizando o json_encode
