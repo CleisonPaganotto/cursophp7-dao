@@ -103,6 +103,8 @@
 			}
 		}
 
+		// Este metodo estava sendo repetido varias vezes dentro das funções, então criamos uma função apenas para colocar os dados dentro das variaveis, desta forma chamando apenas a função.
+
 		public function setData($data){
 
 			$this->setIdusuario($data['idusuario']);
@@ -110,6 +112,8 @@
 			$this->setSenha($data['senha']);
 			$this->setDtcad(new DateTime($data['dtCad']));	
 		}
+
+		//Metodo utilizando para inserir os dados no banco de dados utilizando uma procedure
 
 		public function insert(){
 
@@ -126,6 +130,8 @@
 			}
 		}
 
+		//Metodo utilizado para fazer um Update no usuario com o id informado no arquivo index.php
+
 		public function update($login, $senha){
 
 			$this->setLogin($login);
@@ -140,6 +146,22 @@
 			));
 
 		}
+
+		public function delete(){
+
+			$sql = new Sql();
+
+			$sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID", array(
+				':ID'=>$this->getIdusuario()
+			));
+
+			$this->setIdusuario(0);
+			$this->setLogin("");
+			$this->setSenha("");
+			$this->setDtcad(new DateTime());
+		}
+
+		//Metodo construtor da classe Usuario, com o metodo construtor podemos passar os parametro diretamente dentro do objeto, em seu metodo construtor que é chamado
 
 		public function __construct($login = "", $password = ""){
 			$this->setLogin($login);
