@@ -43,13 +43,13 @@
 
 			$sql = new Sql();
 
-			$result = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
+			$results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
 				":ID"=>$id
 			));
 
-			if (count($result) > 0) {
+			if (count($results) > 0) {
 
-				$row = $result[0];
+				$row = $results[0];
 
 				$this->setIdusuario($row['idusuario']);
 				$this->setLogin($row['login']);
